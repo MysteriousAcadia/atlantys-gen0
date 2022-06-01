@@ -17,13 +17,11 @@ app.get("/image/:id", async (req, res) => {
   try {
     let { id } = req.params;
     id = id?.split(".")[0];
-    if (isNaN(id)) {
+    if (isNaN(id) || id < 0 || id > 2250) {
       console.log(id);
       return;
     }
-    return res.redirect(
-      `https://ipfs.fleek.co/ipfs/QmUDakMq7bDA6ymndudBJCbJVfo2pj2A7fKZmg1h3NmjKx/images/${id}.png`
-    );
+    return res.sendFile(`images/${id}.png`, { root: __dirname });
   } catch (e) {
     console.log(e);
     return res.send({});
