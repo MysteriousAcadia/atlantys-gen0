@@ -37,7 +37,10 @@ app.get("/metadata/:id", async (req, res) => {
     if (id < 0 || id > 2250) {
       return;
     }
-    return res.send({ ...metadataWhales[id] });
+    return res.send({
+      ...metadataWhales[id],
+      image: `https://gen0.atlantys.one/image/${id}`,
+    });
   } catch (e) {
     console.log(e);
     return res.send({});
